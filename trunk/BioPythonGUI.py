@@ -100,17 +100,14 @@ class Base:
     def treestoreUpdate(self):
         """This updates the treestore object"""
 
-	self.treestore.clear()
-	#modified, should still work!!
-
-	for seq in functions.project.getSequenceItemNames():
-	    self.treestore.append(seqiter, [seq])
-	
-	for dbItem in functions.project.getDBItemNames():
-	    self.treestore.append(dbitemiter, [dbItem])
-
-	for dbQuery in functions.project.getDBQueryNames():
-	    self.treestore.append(dbqueryiter, [dbQuery])
+	for item in functions.project.getNewItemNames():
+            clas = functions.project.getItem(item).__class__
+            if clas == objects.SequenceItem:
+                self.treestore.append(self.seqiter, [item])
+            elif clas == objects.DBItem:	
+                self.treestore.append(self.dbitemiter, [item])
+            elif clas == objects.DBQuery:
+                self.treestore.append(self.dbqueryiter, [item])
 
 
     def DispViewContent(self, widget=None):

@@ -7,6 +7,7 @@ class Project:
 	
 	self.projectName = ''
 	self.items = {}
+	self.newItems = {}
 	self.changed = False
 	self.filename = ''
 	self.base = None
@@ -15,6 +16,7 @@ class Project:
     def addItem(self, item):
 	
 	self.items[item.name] = item
+	self.newItems[item.name] = item
 	self.changed = True
 	try:
 	    self.base.treestoreUpdate()
@@ -94,6 +96,13 @@ class Project:
 
     def getNames(self):
 	return self.items.keys()
+
+    def getNewItemNames(self):
+        temp = self.newItems.keys()
+        print temp
+        self.newItems = {}
+        print temp
+        return temp
 
     
     def save(self, filename=0):
