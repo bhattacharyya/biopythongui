@@ -1,0 +1,4 @@
+if you make a sequence and put in letters from the wrong alphabet
+Seq doesn't complain at all nor does transcribe
+
+need to let user know how far the db search has gone, it is VERY slow
