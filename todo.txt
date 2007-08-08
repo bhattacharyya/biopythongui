@@ -1,0 +1,24 @@
+fix startup screen
+
+On all pages
+    change name
+    name set apart
+
+on query page
+    lineup "search term....Max results"
+    make it so you can change name
+    make a link to the sequence
+    picture
+
+On DB item page
+    spread out text fields 
+    label text fields      
+    put borders around title and ID
+    
+on sequence page
+    edit checkbox
+    view as codon checkbox
+    translate trancribe buttons
+    view type (dna rna protien)
+  
+Fix save and open feature

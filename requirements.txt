@@ -1,0 +1,15 @@
+
+Sequence -- Protein, DNA, RNA
+	make a new
+	translate
+	transcribe
+	reverseTranscribe
+	append
+	edit
+	
+DB's
+	get a seq
+	get an abstract
+
+
+	
