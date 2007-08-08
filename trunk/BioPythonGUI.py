@@ -1,4 +1,4 @@
-#/usr/bin/python
+#!/usr/bin/python
 
 import pygtk
 pygtk.require('2.0')
@@ -27,7 +27,7 @@ class Base:
         self._menus()
 	self.DispViewWindow()
 
-	self.window.set_size_request(600, 800)
+	self.window.set_size_request(800, 800)
         self.window.show()
 
 
@@ -49,6 +49,7 @@ class Base:
 	self.contentFrame.show()
 	self.view_window.add1(self.DispViewItems())
 	self.view_window.add2(self.contentFrame)
+	self.view_window.set_position(200)
 
     def DispViewItems(self):
         """This is the view for the items. Returns a widget to be packed
@@ -149,7 +150,8 @@ class Base:
 
         vbox = gtk.VBox()
 
-        label = gtk.Label(item.name)
+        label = gtk.Label()
+        label.set_markup('<big><b><u>%s</u></b></big>' % item.name)
         label.show()
         vbox.pack_start(label, False, False, 5)
 
@@ -166,10 +168,6 @@ class Base:
         scroller.show()
         scroller.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         vbox.pack_end(scroller, True, True, 2)
-
-        label = gtk.Label(item.name)
-        label.show()
-        vbox.pack_start(label, False, False, 0)
 
         textArea = gtk.TextView()
         textArea.set_editable(False)
@@ -220,6 +218,7 @@ class Base:
 	pane2 = gtk.VPaned()
 	pane2.show()
 	pane.add2(pane2)
+	pane.set_position(75)
 
         scroller1 = gtk.ScrolledWindow()
         scroller1.show()
@@ -238,6 +237,7 @@ class Base:
         scroller2.show()
         pane2.add2(scroller2)
         scroller2.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        pane2.set_position(400)
 
         textArea = gtk.TextView()
         textArea.set_editable(False)
