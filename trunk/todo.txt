@@ -1,8 +1,8 @@
-fix startup screen
+fix startup screen  --  done
 
 On all pages
     change name
-    name set apart
+    name set apart  --  done
 
 on query page
     lineup "search term....Max results"
@@ -11,8 +11,8 @@ on query page
     picture
 
 On DB item page
-    spread out text fields 
-    label text fields      
+    spread out text fields  --  done
+    label text fields       -- done
     put borders around title and ID
     
 on sequence page
@@ -21,4 +21,4 @@ on sequence page
     translate trancribe buttons
     view type (dna rna protien)
   
-Fix save and open feature
+Fix save and open features

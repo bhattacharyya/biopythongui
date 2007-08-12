@@ -196,7 +196,31 @@ def open_query(widget):
     query = cPickle.load(file)
     query.register()
 
+    
+def changeName(widget, item):
+    
+    def activate(widget, item, dialog):
+	dialog.destroy()
+	item.changeName(widget.get_text())
 
+    name = ''
+    
+    dialog = gtk.Dialog('Change Name')
+    
+    entry = gtk.Entry()
+    entry.set_text(item.name)
+    entry.connect('activate', activate, item, dialog)
+    entry.show()
+    dialog.vbox.pack_start(entry, True, True, 0)
 
+    dialog.add_button(gtk.STOCK_OK , gtk.RESPONSE_OK)
+    dialog.add_button(gtk.STOCK_CANCEL , gtk.RESPONSE_CANCEL)
 
+    out = dialog.run()
+
+    if out == gtk.RESPONSE_OK and not name:
+	item.changeName(entry.get_text())
+	dialog.destroy()
+    elif out == gtk.RESPONSE_CANCEL:
+	dialog.destroy()
 
