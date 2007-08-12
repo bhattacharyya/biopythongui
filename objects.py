@@ -198,7 +198,7 @@ class DBItem(Item):
 
 	self.project.addItem(self)
 
-	seqItem = SequenceItem(self.project, seq, name=id)
+	self.seqItem = SequenceItem(self.project, seq, name=id)
 
     def getAbstract(self):
 	return self.abstract

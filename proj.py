@@ -8,6 +8,7 @@ class Project:
 	self.projectName = ''
 	self.items = {}
 	self.newItems = {}
+	self.delItems = {}
 	self.changed = False
 	self.filename = ''
 	self.base = None
@@ -34,9 +35,11 @@ class Project:
     def delItem(self, item):
 
 	if type(item)==str:
-	    del items[item]
+	    self.delItems[item] = self.items[item]
+	    del self.items[item]
 	else:
-	    del items[item.name]
+	    self.delItems[item.name] = item
+	    del self.items[item.name]
 	self.changed = True
 	self.base.treestoreUpdate()
 
@@ -99,10 +102,13 @@ class Project:
 
     def getNewItemNames(self):
         temp = self.newItems.keys()
-        print temp
         self.newItems = {}
-        print temp
         return temp
+
+    def getDelItemNames(self):
+	temp = self.delItems.values()
+	self.delItems = {}
+	return temp
 
     
     def save(self, filename=0):

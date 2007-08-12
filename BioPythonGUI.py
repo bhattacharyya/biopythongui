@@ -30,6 +30,8 @@ class Base:
 	self.window.set_size_request(800, 800)
         self.window.show()
 
+	self.window.set_icon_from_file('dnaIcon.jpg')
+
 
     def main(self):
         """calls gtk.main() to start the program"""
@@ -101,6 +103,9 @@ class Base:
     def treestoreUpdate(self):
         """This updates the treestore object"""
 
+	for item in functions.project.getDelItemNames():
+	    del self.treestore[(self.seqiter, item)]
+
 	for item in functions.project.getNewItemNames():
             clas = functions.project.getItem(item).__class__
             if clas == objects.SequenceItem:
@@ -149,11 +154,15 @@ class Base:
             new = self.DBQuery_show(item)
 
         vbox = gtk.VBox()
-
+	
         label = gtk.Label()
         label.set_markup('<big><b><u>%s</u></b></big>' % item.name)
         label.show()
-        vbox.pack_start(label, False, False, 5)
+	nameButton = gtk.Button()
+	nameButton.add(label)
+	nameButton.show()
+        vbox.pack_start(nameButton, False, False, 5)
+	nameButton.connect('clicked', functions.changeName, item)
 
         vbox.pack_end(new, True, True, 0)
         self.DispViewContent(vbox)
@@ -207,22 +216,18 @@ class Base:
 	pane.show()
 	rest.add(pane)
 
-        descript = gtk.TextView()
-        descript.set_editable(False)
-        descript.show()
-        pane.add1(descript)
-        descript.set_wrap_mode(gtk.WRAP_WORD)
-        text = descript.get_buffer()
-        text.set_text(item.descript)
+	abBox = gtk.VBox()
+	abBox.show()
+	pane.add1(abBox)
 
-	pane2 = gtk.VPaned()
-	pane2.show()
-	pane.add2(pane2)
-	pane.set_position(75)
+	abLabel = gtk.Label()
+	abLabel.set_markup('<i>Abstract</i>')
+	abLabel.show()
+	abBox.pack_start(abLabel, False, True, 5)
 
         scroller1 = gtk.ScrolledWindow()
         scroller1.show()
-        pane2.add1(scroller1)
+        abBox.pack_end(scroller1, True, True, 0)
         scroller1.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
 
         abstract = gtk.TextView()
@@ -232,12 +237,21 @@ class Base:
         abstract.set_wrap_mode(gtk.WRAP_WORD)
         abstractText = abstract.get_buffer()
         abstractText.set_text(item.abstract)
+
+	seqBox = gtk.VBox()
+	seqBox.show()
+	pane.add2(seqBox)
+
+	seqLabel = gtk.Label()
+	seqLabel.set_markup('<i>Sequence: %s </i>' % (item.seqItem.name))
+	seqLabel.show()
+	seqBox.pack_start(seqLabel, False, True, 5)
         
         scroller2 = gtk.ScrolledWindow()
         scroller2.show()
-        pane2.add2(scroller2)
+        seqBox.pack_end(scroller2, True, True, 0)
         scroller2.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-        pane2.set_position(400)
+        pane.set_position(400)
 
         textArea = gtk.TextView()
         textArea.set_editable(False)
